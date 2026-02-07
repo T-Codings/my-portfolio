@@ -8,26 +8,10 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: '#0A693A',
-          light: '#0D8347',
-          dark: '#074D29',
-        },
-        secondary: {
-          DEFAULT: '#6B7D29',
-          light: '#8A9F3D',
-          dark: '#505E1F',
-        },
-        accent: {
-          red: '#CD291F',
-          'red-dark': '#B70E0C',
-          gold: '#D4AF37',
-        },
-        neutral: {
-          950: '#0A0F0D',
-          900: '#1A1F1D',
-          800: '#2A2F2D',
-        },
+        primary: '#9333EA',
+        secondary: '#1E293B',
+        'purple-gradient-start': '#A855F7',
+        'purple-gradient-end': '#7C3AED',
       },
       animation: {
         'fade-in': 'fadeIn 1s ease-in',
