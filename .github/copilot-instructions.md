@@ -6,8 +6,8 @@ This is a **React 18 + Vite SPA portfolio** with client-side routing, security-f
 
 - **Multi-page routing via React Router**: Each section (Home, About, Skills, Projects, Contact) is a separate page under `src/pages/`, not hash-anchored sections
 - **Component + Page separation**: `src/components/` contains reusable UI (Hero, Navbar, Contact), while `src/pages/` wraps them into full page views (e.g., `Home.jsx` imports `Hero.jsx`)
-- **Context-based theming**: Dark/light mode managed via `src/context/ThemeContext.jsx` with localStorage persistence
-- **AOS animations**: Initialized globally in `App.jsx` with `AOS.init()` - affects all components with `data-aos` attributes
+- **Context-based theming**: Dark/light mode managed via `src/context/ThemeContext.jsx` with localStorage persistence. ThemeProvider wraps entire app in `main.jsx`
+- **AOS animations**: Initialized globally in `App.jsx` with `AOS.init()` - affects all components with `data-aos` attributes. CSS imported in `main.jsx` via `import 'aos/dist/aos.css'`
 - **Firebase Analytics**: Visitor tracking via Firestore with admin dashboard at `/admin` route
 
 ## Critical Workflows
@@ -64,16 +64,18 @@ const handleChange = (e) => {
 
 ### Tailwind Custom Utilities
 Custom classes in [src/index.css](src/index.css):
-- `.btn-primary` - Gradient cyan button with hover lift effect
-- `.btn-secondary` - Outline button style
-- `.section-title` / `.section-subtitle` - Consistent heading styles
+- `.btn-primary` - Gradient button (green to olive) with hover lift effect (`hover:-translate-y-1`)
+- `.btn-secondary` - Outline button with white background, green border, transforms on hover
+- `.section-title` / `.section-subtitle` - Consistent heading styles (4xl/5xl and lg/xl respectively)
+- `.gradient-text` - Multi-color gradient text effect using bg-clip-text
+- `.card-hover` - Reusable hover effect with shadow and lift
 
 Custom animations in [tailwind.config.js](tailwind.config.js):
 - `animate-fade-in`, `animate-slide-up`, `animate-scale-in` - Used for page transitions
 - `animate-pulse-slow`, `animate-bounce-slow` - Background decorative elements
 
 ### AnimatedBackground Component
-[src/components/AnimatedBackground.jsx](src/components/AnimatedBackground.jsx) renders floating code symbols (`{ }`, `< />`, etc.). CSS animations defined in [src/index.css](src/index.css) via `.running-object-{1-6}` classes. Use this component for visual consistency on Hero/Contact pages.
+[src/components/AnimatedBackground.jsx](src/components/AnimatedBackground.jsx) renders floating code symbols (`{ }`, `< />`, etc.). CSS animations defined in [src/index.css](src/index.css) via `.running-object-{1-6}` classes with `@keyframes moveAcross` and `moveAcrossReverse`. Use this component for visual consistency on Hero/Contact pages.
 
 ### Routing Structure
 ```
@@ -83,7 +85,7 @@ Custom animations in [tailwind.config.js](tailwind.config.js):
 /projects → ProjectsPage.jsx → Projects component
 /contact → ContactPage.jsx → Contact component
 ```
-Navbar uses `useLocation()` to highlight active page. Links use `<Link to="/path">` (not hash fragments).
+Navbar uses `useLocation()` to highlight active page. Links use `<Link to="/path">` (not hash fragments). Mobile menu uses hamburger icon with slide-in drawer on smaller screens.
 
 ## Common Integration Points
 
