@@ -1,19 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 const LoadingScreen = () => {
-  const [isLoading, setIsLoading] = useState(true)
-
-  useEffect(() => {
-    // Simulate loading time
-    const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 6000)
-
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (!isLoading) return null
-
   return (
     <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gray-900 animate-fade-in">
       <div className="text-center flex flex-col items-center gap-4">
@@ -22,7 +9,7 @@ const LoadingScreen = () => {
         
         {/* Loading Text */}
         <h2 className="text-2xl font-semibold text-white">
-          Loading Portfolio...
+          Loading...
         </h2>
       </div>
     </div>

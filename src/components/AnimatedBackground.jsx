@@ -24,7 +24,7 @@ const AnimatedBackground = () => {
             }}
           >
             <IconComponent 
-              size={index % 2 === 0 ? 40 : 32} 
+              size={index % 2 === 0 ? 30 : 22} 
               color={item.color}
               strokeWidth={2.5}
             />

@@ -2,6 +2,8 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaGithub, FaLinkedin, FaEnvelope, FaCode, FaRocket, FaStar } from 'react-icons/fa'
 import AnimatedBackground from './AnimatedBackground'
+import profileImg from '../assets/Pro img.png'
+
 
 const Hero = () => {
   return (
@@ -27,9 +29,9 @@ const Hero = () => {
               {/* Profile Photo Card */}
               <div className="relative bg-gray-800 rounded-full shadow-2xl p-3 transform group-hover:scale-105 transition-transform duration-300 ring-4 ring-[#0A693A]/50 shadow-[#0A693A]/50">
                 <div className="w-96 h-96 md:w-96 md:h-96 rounded-full overflow-hidden bg-gradient-to-br from-[#0A693A] to-[#6B7D29] shadow-xl">
-                  <img 
-                    src="/src/assets/Pro img.png" 
-                    alt="</T-Codings/> - Portfolio" 
+                  <img
+                    src={profileImg}
+                    alt="</T-Codings/> - Portfolio"
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -50,7 +52,7 @@ const Hero = () => {
               {/* Greeting Badge */}
               <div className="inline-block animate-slide-down">
                 <span className="bg-gradient-to-r from-[#6B7D29]/40 to-[#6B7D29]/40 text-[#0A693A] px-6 py-2 rounded-full text-sm font-semibold border border-[#0A693A] shadow-sm">
-                  👋 Welcome to my portfolio
+                   Welcome to my portfolio
                 </span>
               </div>
 

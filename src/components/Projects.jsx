@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaGithub, FaExternalLinkAlt, FaClock, FaCheckCircle, FaStar } from 'react-icons/fa'
 import AnimatedBackground from './AnimatedBackground'
+import proImg from '../assets/Pro img.png'
 
 const Projects = () => {
   const projects = [
@@ -11,7 +12,7 @@ const Projects = () => {
       liveLink: 'https://gentle-brioche-41d571.netlify.app/',
       githubLink: 'https://github.com/yourusername/project1',
       status: 'deployed',
-      image: 'https://via.placeholder.com/600x400/9333EA/FFFFFF?text=Project+1',
+      image: proImg,
     },
     {
       title: 'Project Name 2',
@@ -20,7 +21,7 @@ const Projects = () => {
       liveLink: 'https://creative-kitsune-24a681.netlify.app/',
       githubLink: 'https://github.com/yourusername/project2',
       status: 'deployed',
-      image: 'https://via.placeholder.com/600x400/A855F7/FFFFFF?text=Project+2',
+      image: proImg,
     },
     {
       title: 'Mathews Foundation',
@@ -29,7 +30,7 @@ const Projects = () => {
       liveLink: 'https://mathewsfoundation.com/',
       githubLink: 'https://github.com/yourusername/mathews-foundation-theme',
       status: 'deployed',
-      image: 'https://via.placeholder.com/600x400/C084FC/FFFFFF?text=Mathews+Foundation',
+      image: proImg,
     },
   ]
 

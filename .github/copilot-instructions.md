@@ -86,45 +86,30 @@ Custom animations in [tailwind.config.js](tailwind.config.js):
 /contact → ContactPage.jsx → Contact component
 ```
 Navbar uses `useLocation()` to highlight active page. Links use `<Link to="/path">` (not hash fragments). Mobile menu uses hamburger icon with slide-in drawer on smaller screens.
+# Portfolio Codebase Guide for AI Agents
 
-## Common Integration Points
+This project is a React 18 + Vite SPA with client-side routing and lightweight Firebase analytics. Below are the concise, actionable patterns an AI coding agent should follow to be productive.
 
-### Adding New Sections
-1. Create component in `src/components/`
-2. Create page wrapper in `src/pages/` that imports the component
-3. Add route in [src/App.jsx](src/App.jsx#L28-L34)
-4. Add menu item in [src/components/Navbar.jsx](src/components/Navbar.jsx#L13-L18) `menuItems` array
+- **Architecture (big picture):** routes are page wrappers in [src/pages](src/pages) (e.g., `Home.jsx`) that import reusable UI from [src/components](src/components). The app uses `ThemeContext` (`src/context/ThemeContext.jsx`) for dark/light mode and initializes AOS in [src/App.jsx](src/App.jsx).
 
-### Theme-Aware Components
-Use `useTheme()` hook for dark mode state:
-```jsx
-import { useTheme } from '../context/ThemeContext'
-const { isDark, toggleTheme } = useTheme()
-```
-CSS classes: `dark:text-gray-300` for dark mode variants (Tailwind's `darkMode: 'class'` config).
+- **Local dev & build:** `npm run dev`, `npm run build`, `npm run preview`.
 
-### Custom Colors
-Primary brand colors defined in [tailwind.config.js](tailwind.config.js):
-- **Primary**: Green palette (`#0A693A`, `#0D8347`, `#074D29`) - Main brand color
-- **Secondary**: Olive/yellow-green (`#6B7D29`, `#8A9F3D`, `#505E1F`) - Complementary accent
-- **Accent Red**: `#CD291F` (with dark variant `#B70E0C`) - Call-to-action elements
-- **Accent Gold**: `#D4AF37` - Premium highlights
-- **Neutral**: Dark grays (`#0A0F0D`, `#1A1F1D`, `#2A2F2D`) - Backgrounds
+- **Forms & security:** All user inputs must be sanitized/validated using [src/utils/security.js](src/utils/security.js). Key helpers: `sanitizeInput()`, `validateEmail()`, `validateName()`, `validateMessage()`, and `rateLimit()` (3 submissions/min). See input handling pattern in [src/components/Contact.jsx](src/components/Contact.jsx).
 
-Main app background gradient: `from-gray-900 via-gray-800 to-green-900` (defined in `App.jsx`).
+- **Email sending:** Contact form uses EmailJS client-side (`src/components/Contact.jsx`). Required env vars: `VITE_EMAILJS_SERVICE_ID`, `VITE_EMAILJS_TEMPLATE_ID`, `VITE_EMAILJS_PUBLIC_KEY`.
 
-## Key Files Reference
+- **Visitor tracking / analytics:** Tracking lives in [src/utils/visitorTracking.js](src/utils/visitorTracking.js) and is wired from `App.jsx` (calls `trackVisitor()` on mount). Admin UI: [src/pages/AdminDashboard.jsx](src/pages/AdminDashboard.jsx). Note: `src/firebaseConfig.js` currently exposes credentials—prefer `.env` via `VITE_FIREBASE_*` in production and use the `isFirebaseConfigured` guard before tracking.
 
-- [src/App.jsx](src/App.jsx) - Router setup, AOS initialization, layout structure
-- [src/utils/security.js](src/utils/security.js) - **Required** for all form inputs
-- [SECURITY.md](SECURITY.md) - Comprehensive security implementation docs
-- [ADMIN_SETUP.md](ADMIN_SETUP.md) - Firebase analytics setup instructions
-- [tailwind.config.js](tailwind.config.js) - Custom animations, colors, keyframes
-- [src/context/ThemeContext.jsx](src/context/ThemeContext.jsx) - Theme state management
+- **Styling & utilities:** Tailwind + custom utilities are in [src/index.css](src/index.css) and [tailwind.config.js](tailwind.config.js). Reusable classes: `.btn-primary`, `.btn-secondary`, `.section-title`, `.gradient-text`, `.card-hover`. Animated background component: [src/components/AnimatedBackground.jsx](src/components/AnimatedBackground.jsx).
 
-## Dependencies Notes
-- **React Router DOM 7.13** - Uses newer `<Routes>` API (not `<Switch>`)
-- **AOS 2.3** - Import CSS globally in [main.jsx](src/main.jsx#L6): `import 'aos/dist/aos.css'`
-- **React Icons 5.0** - Import from category submodules: `react-icons/fa`, `react-icons/md`
-- **EmailJS Browser 4.4** - No backend required; client-side email sending
-- **Firebase 12.9** - Firestore for analytics, gracefully degrades if not configured
+- **Adding pages/components:** Create UI in `src/components/`, add a page wrapper in `src/pages/`, register the route in [src/App.jsx](src/App.jsx), and add the menu entry in [src/components/Navbar.jsx](src/components/Navbar.jsx).
+
+- **Key files to inspect first:** [src/App.jsx](src/App.jsx), [src/main.jsx](src/main.jsx), [src/utils/security.js](src/utils/security.js), [src/utils/visitorTracking.js](src/utils/visitorTracking.js), [src/components/Contact.jsx](src/components/Contact.jsx), [src/context/ThemeContext.jsx](src/context/ThemeContext.jsx), [src/firebaseConfig.js](src/firebaseConfig.js), [tailwind.config.js](tailwind.config.js).
+
+- **Patterns to preserve:**
+  - Never use raw `e.target.value` in forms; always run `sanitizeInput()`.
+  - Use `useTheme()` from `ThemeContext` for theme-aware rendering.
+  - Prefer client-side EmailJS usage as implemented; do not introduce a new backend without updating README/ADMIN_SETUP.md.
+
+Please review this condensed guide and tell me if you want additional examples, expanded security notes, or automated checks (lint/test) added.
+
