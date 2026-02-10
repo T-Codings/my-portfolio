@@ -2,35 +2,39 @@ import React from 'react'
 import { FaGithub, FaExternalLinkAlt, FaClock, FaCheckCircle, FaStar } from 'react-icons/fa'
 import AnimatedBackground from './AnimatedBackground'
 import proImg from '../assets/Pro img.png'
+import { Notebook } from 'lucide-react'
+import chatImg from '../assets/Mingcutechat.png'
+import mathewsImg from '../assets/mathews.png'
+import NoteBook from  'lucide-react'
 
 const Projects = () => {
   const projects = [
     {
-      title: 'Project Name 1',
+      title: 'NoteBook Application',
       description: 'A modern web application built with React and Tailwind CSS. Features include responsive design, user authentication, and dynamic content rendering.',
       technologies: ['React', 'Tailwind CSS', 'JavaScript'],
-      liveLink: 'https://gentle-brioche-41d571.netlify.app/',
+      liveLink: 'https://gorgeous-clafoutis-5ade19.netlify.app/',
       githubLink: 'https://github.com/yourusername/project1',
       status: 'deployed',
-      image: proImg,
+      image: null, // Will use Lucide icon
     },
     {
-      title: 'Project Name 2',
+      title: 'Chat Application',
       description: 'An interactive web application showcasing modern frontend development practices. Includes state management and API integration.',
       technologies: ['React', 'CSS', 'REST API'],
       liveLink: 'https://creative-kitsune-24a681.netlify.app/',
       githubLink: 'https://github.com/yourusername/project2',
       status: 'deployed',
-      image: proImg,
+      image: chatImg,
     },
     {
       title: 'Mathews Foundation',
-      description: 'A professional WordPress website for Mathews Foundation, featuring custom design, responsive layout, and content management system for the organization.',
+      description: 'A professional WordPress website for Mathews Foundation Nursery and Primary School, featuring custom design, responsive layout, and content management system for the institution.',
       technologies: ['WordPress', 'PHP', 'CSS', 'MySQL'],
       liveLink: 'https://mathewsfoundation.com/',
       githubLink: 'https://github.com/yourusername/mathews-foundation-theme',
       status: 'deployed',
-      image: proImg,
+      image: mathewsImg,
     },
   ]
 
@@ -57,18 +61,21 @@ const Projects = () => {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-gray-800 rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-[#6B7D29] animate-scale-in"
+              className="group bg-gray-800/30 backdrop-blur-lg rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-3 border border-white/10 hover:border-[#0A693A]/50 animate-scale-in"
               style={{ animationDelay: `${index * 150}ms` }}
             >
               {/* Project Image */}
-              <div className="relative overflow-hidden h-56 bg-gradient-to-br from-[#0A693A] to-[#6B7D29]">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                />
+              <div className="relative overflow-hidden h-56 bg-gradient-to-br from-[#0A693A] to-[#6B7D29] flex items-center justify-center">
+                {project.title === 'NoteBook Application' ? (
+                  <Notebook size={96} color="#fff" strokeWidth={1.5} className="mx-auto my-auto drop-shadow-lg" />
+                ) : (
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                
                 {project.status === 'in-progress' && (
                   <div className="absolute top-4 right-4 bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold flex items-center gap-2 shadow-lg animate-bounce-slow">
                     <FaClock /> In Progress
@@ -79,7 +86,6 @@ const Projects = () => {
                     <FaCheckCircle /> Live
                   </div>
                 )}
-                
                 {/* Hover Overlay */}
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <FaStar className="text-white text-5xl animate-pulse" />
@@ -87,7 +93,7 @@ const Projects = () => {
               </div>
 
               {/* Project Content */}
-              <div className="p-6">
+              <div className="p-6 bg-gray-900/50 backdrop-blur-md">
                 <h3 className="text-2xl font-bold text-white mb-3 group-hover:text-[#0A693A] transition-colors duration-300">
                   {project.title}
                 </h3>
@@ -97,14 +103,17 @@ const Projects = () => {
 
                 {/* Technologies */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  {project.technologies.map((tech, techIndex) => (
-                    <span
-                      key={techIndex}
-                      className="px-3 py-1 bg-gradient-to-r from-[#6B7D29]/40 to-[#6B7D29]/40 text-[#0A693A] text-sm rounded-full font-semibold border border-[#0A693A]"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+                  {project.technologies.map((tech, techIndex) => {
+                    return (
+                      <span
+                        key={techIndex}
+
+                        className="px-3 py-1 bg-gradient-to-r from-[#6B7D29]/40 to-[#6B7D29]/40 text-gray-200 text-sm rounded-full font-semibold border border-[#0A693A]"
+                      >
+                        {tech}
+                      </span>
+                    );
+                  })}
                 </div>
 
                 {/* Links */}
@@ -114,9 +123,14 @@ const Projects = () => {
                       href={project.liveLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gradient-to-r from-[#0A693A] to-[#6B7D29] text-white rounded-xl font-semibold hover:from-[#6B7D29] hover:to-[#0A693A] transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1"
+                      className="group/btn flex-1 relative overflow-hidden"
                     >
-                      <FaExternalLinkAlt /> Live Demo
+                      <div className="absolute rounded-md inset-0 bg-gradient-to-r from-[#0A693A] via-[#6B7D29] to-[#0A693A] opacity-100 group-hover/btn:opacity-90 transition-opacity duration-300"></div>
+                      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
+                      <div className="relative flex items-center justify-center gap-2 px-4 py-3 text-white font-bold shadow-lg group-hover/btn:shadow-2xl transform group-hover/btn:-translate-y-1 transition-all duration-300">
+                        <FaExternalLinkAlt className="text-sm group-hover/btn:rotate-12 transition-transform duration-300" />
+                        <span className="bg-clip-text">Live Demo</span>
+                      </div>
                     </a>
                   )}
                   {project.githubLink && (
@@ -124,7 +138,7 @@ const Projects = () => {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-gray-800 text-white rounded-xl font-semibold hover:bg-gray-900 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 backdrop-blur-sm text-white rounded-xl rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 border border-white/10"
                     >
                       <FaGithub /> Code
                     </a>
@@ -137,8 +151,8 @@ const Projects = () => {
 
         {/* Note */}
         <div className="mt-16 text-center animate-slide-up">
-          <div className="inline-block bg-gradient-to-r from-[#6B7D29]/40 to-[#6B7D29]/40 px-8 py-4 rounded-2xl border border-[#0A693A] shadow-lg">
-            <p className="text-[#0A693A] font-semibold text-lg flex items-center gap-2">
+          <div className="inline-block bg-gray-800/30 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/10 shadow-lg">
+            <p className="color-gray-100 font-semibold text-lg flex items-center gap-2">
               <FaStar className="text-yellow-500" />
               More exciting projects coming soon as I continue to learn and build!
             </p>

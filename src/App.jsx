@@ -33,27 +33,26 @@ function App() {
     return () => clearTimeout(timer)
   }, [])
 
-  // Show only loading screen while loading
-  if (isLoading) {
-    return <LoadingScreen />
-  }
-
   return (
     <Router>
-      <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-green-900">
-        <Navbar />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<Landing />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/skills" element={<SkillsPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/contact" element={<ContactPage />} />
-            <Route path="/admin" element={<AdminDashboard />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-green-900">
+          <Navbar />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/skills" element={<SkillsPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/contact" element={<ContactPage />} />
+              <Route path="/admin" element={<AdminDashboard />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      )}
     </Router>
   )
 }

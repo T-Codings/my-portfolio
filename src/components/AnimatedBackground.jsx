@@ -5,14 +5,13 @@ const AnimatedBackground = () => {
   const codeIcons = [
     { component: Star, color: '#0A693A' },
     { component: Code, color: '#6B7D29' },
-    { component: Braces, color: '#CD291F' },
     { component: Brackets, color: '#0A693A' },
     { component: Component, color: '#B70E0C' },
-    { component: Code, color: '#6B7D29' },
+ 
   ]
 
   return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+    <div className="absolute inset-0 overflow-hidden -ml-8 pointer-events-none">
       {codeIcons.map((item, index) => {
         const IconComponent = item.component
         return (
