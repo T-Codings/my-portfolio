@@ -122,7 +122,7 @@ const Projects = () => {
                       rel="noopener noreferrer"
                       className="group/btn flex-1 relative overflow-hidden"
                     >
-                      <div className="absolute rounded-md inset-0 bg-gradient-to-r from-[#0A693A] via-[#6B7D29] to-[#0A693A] opacity-100 group-hover/btn:opacity-90 transition-opacity duration-300"></div>
+                      <div className="absolute rounded-xl inset-0 bg-gradient-to-r from-[#0A693A] via-[#6B7D29] to-[#0A693A] opacity-100 group-hover/btn:opacity-90 transition-opacity duration-300"></div>
                       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover/btn:translate-x-[100%] transition-transform duration-700"></div>
                       <div className="relative flex items-center justify-center gap-2 px-4 py-3 text-white font-bold shadow-lg group-hover/btn:shadow-2xl transform group-hover/btn:-translate-y-1 transition-all duration-300">
                         <FaExternalLinkAlt className="text-sm group-hover/btn:rotate-12 transition-transform duration-300" />
@@ -135,7 +135,7 @@ const Projects = () => {
                       href={project.githubLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 backdrop-blur-sm text-white rounded-xl rounded-lg font-semibold hover:bg-white/10 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 border border-white/10"
+                      className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-white/5 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/10 transition-all duration-300 shadow-md hover:shadow-xl transform hover:-translate-y-1 border border-white/10"
                     >
                       <FaGithub /> Code
                     </a>
@@ -149,7 +149,7 @@ const Projects = () => {
         {/* Note */}
         <div className="mt-16 text-center animate-slide-up">
           <div className="inline-block bg-gray-800/30 backdrop-blur-lg px-8 py-4 rounded-2xl border border-white/10 shadow-lg">
-            <p className="color-gray-100 font-semibold text-lg flex items-center gap-2">
+            <p className="text-gray-100 font-semibold text-lg flex items-center gap-2">
               <FaStar className="text-yellow-500" />
               More exciting projects coming soon as I continue to learn and build!
             </p>

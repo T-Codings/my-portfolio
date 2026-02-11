@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center hover:scale-105 transition-transform duration-300">
-            <img src={Log} alt="T-Codings log" className="w-[160px] h-[140px] mt-2 mb-2" />
+            <img src={Log} alt="T-Codings log" className="w-24 sm:w-28 md:w-40 h-auto transition-all duration-300  mb-4 mt-2" />
           </Link>
 
           {/* Desktop Menu */}
