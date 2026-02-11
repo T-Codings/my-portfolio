@@ -7,15 +7,15 @@ import profileImg from '../assets/Pro img.png'
 
 const Hero = () => {
   return (
-    <section id="home" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16 bg-gray-900">
+    <section id="home" className="min-h-screen flex items-center justify-center relative bg-gray-900">
       {/* Running Background Objects */}
       <AnimatedBackground />
       
       {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-20 left-10 w-72 h-72 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow"></div>
-        <div className="absolute top-40 right-10 w-72 h-72 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow animation-delay-2000"></div>
-        <div className="absolute -bottom-8 left-1/2 w-72 h-72 bg-[#0A693A] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow animation-delay-4000"></div>
+      <div className=" inset-0">
+        <div className=" top-20 left-10 w-72 h-72 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow"></div>
+        <div className=" top-40 right-10 w-72 h-72 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow animation-delay-2000"></div>
+        <div className=" -bottom-8 left-1/2 w-72 h-72 bg-[#0A693A] rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-pulse-slow animation-delay-4000"></div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -126,7 +126,7 @@ const Hero = () => {
                   <FaGithub className="text-xl" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/yourusername"
+                  href="https://linkedin.com/in/ndi-theo-a695b43a8"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-gray-700 shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-[#0A693A] hover:to-[#6B7D29] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
@@ -135,7 +135,7 @@ const Hero = () => {
                   <FaLinkedin className="text-xl" />
                 </a>
                 <a
-                  href="mailto:your.email@example.com"
+                  href="mailto:tcodings1111@gmailcom"
                   className="w-12 h-12 flex items-center justify-center rounded-full bg-white text-gray-700 shadow-md hover:shadow-xl hover:bg-gradient-to-r hover:from-[#0A693A] hover:to-[#6B7D29] hover:text-white transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
                   aria-label="Email"
                 >

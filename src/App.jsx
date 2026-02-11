@@ -1,60 +1,55 @@
-import React, { useState, useEffect } from 'react'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import AOS from 'aos'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import LoadingScreen from './components/LoadingScreen'
-import Landing from './pages/Landing'
-import AboutPage from './pages/AboutPage'
-import SkillsPage from './pages/SkillsPage'
-import ProjectsPage from './pages/ProjectsPage'
-import ContactPage from './pages/ContactPage'
-import AdminDashboard from './pages/AdminDashboard'
-import { trackVisitor } from './utils/visitorTracking'
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import AOS from "aos";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import LoadingScreen from "./components/LoadingScreen";
+import Landing from "./pages/Landing";
+import AboutPage from "./pages/AboutPage";
+import SkillsPage from "./pages/SkillsPage";
+import ProjectsPage from "./pages/ProjectsPage";
+import ContactPage from "./pages/ContactPage";
+import AdminDashboard from "./pages/AdminDashboard";
+import { trackVisitor } from "./utils/visitorTracking";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     AOS.init({
       duration: 1000,
       once: true,
       offset: 100,
-    })
-    
-    // Track visitor on initial load
-    trackVisitor()
+    });
 
-    // Set loading complete after 2.5 seconds
+    trackVisitor();
+
     const timer = setTimeout(() => {
-      setIsLoading(false)
-    }, 2500)
+      setIsLoading(false);
+    }, 2500);
 
-    return () => clearTimeout(timer)
-  }, [])
+    return () => clearTimeout(timer);
+  }, []);
 
-  return (
-    <Router>
-      {isLoading ? (
-        <LoadingScreen />
-      ) : (
-        <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-green-900">
-          <Navbar />
-          <main className="flex-grow">
-            <Routes>
-              <Route path="/" element={<Landing />} />
-              <Route path="/about" element={<AboutPage />} />
-              <Route path="/skills" element={<SkillsPage />} />
-              <Route path="/projects" element={<ProjectsPage />} />
-              <Route path="/contact" element={<ContactPage />} />
-              <Route path="/admin" element={<AdminDashboard />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-      )}
-    </Router>
-  )
+  return isLoading ? (
+    <LoadingScreen />
+  ) : (
+    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-gray-800 to-green-900">
+      <Navbar />
+      <main>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/skills" element={<SkillsPage />} />
+          <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/contact" element={<ContactPage />} />
+          <Route path="/admin" element={<AdminDashboard />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
 }
 
-export default App
+export default App;
+

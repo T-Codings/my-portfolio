@@ -13,7 +13,7 @@ const Projects = () => {
       description: 'A modern web application built with React and Tailwind CSS. Features include responsive design, user authentication, and dynamic content rendering.',
       technologies: ['React', 'Tailwind CSS', 'JavaScript'],
       liveLink: 'https://gorgeous-clafoutis-5ade19.netlify.app/',
-      githubLink: 'https://github.com/yourusername/project1',
+      githubLink: 'https://github.com/T-Codings/solid-octo-winner.git',
       status: 'deployed',
       image: null, // Will use Lucide icon
     },
@@ -22,7 +22,7 @@ const Projects = () => {
       description: 'An interactive web application showcasing modern frontend development practices. Includes state management and API integration.',
       technologies: ['React', 'CSS', 'REST API'],
       liveLink: 'https://creative-kitsune-24a681.netlify.app/',
-      githubLink: 'https://github.com/yourusername/project2',
+      githubLink: 'https://github.com/T-Codings/silver-system.git',
       status: 'deployed',
       image: chatImg,
     },

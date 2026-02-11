@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { FaGithub, FaLinkedin, FaTwitter, FaHeart, FaRocket, FaCode } from 'react-icons/fa'
+import { FaGithub, FaLinkedin, FaHeart, FaRocket, FaCode } from 'react-icons/fa'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -82,7 +82,7 @@ const Footer = () => {
                 <FaGithub className="text-xl" />
               </a>
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/ndi-theo-a695b43a8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-[#0A693A] hover:to-[#6B7D29] transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
@@ -90,15 +90,7 @@ const Footer = () => {
               >
                 <FaLinkedin className="text-xl" />
               </a>
-              <a
-                href="https://twitter.com/yourusername"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-sm hover:bg-gradient-to-r hover:from-[#0A693A] hover:to-[#6B7D29] transition-all duration-300 transform hover:scale-110 hover:-translate-y-1"
-                aria-label="Twitter"
-              >
-                <FaTwitter className="text-xl" />
-              </a>
+            
             </div>
           </div>
         </div>
