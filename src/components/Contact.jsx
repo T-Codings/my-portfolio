@@ -259,7 +259,8 @@ const Contact = () => {
                   <h4 className="font-bold text-xl text-white">Availability</h4>
                 </div>
                 <p className="text-gray-300 font-medium">
-                  Currently available for freelance projects and full-time opportunities
+                  Currently available for freelance projects, contracts, and part-time opportunities.
+
                 </p>
               </div>
             </div>
@@ -267,7 +268,7 @@ const Contact = () => {
             {/* Social Links */}
             <div className="space-y-4">
               <a
-                href="mailto:nyangtheo79@gmail.com"
+                href="mailto:tcodings1111@gmail.com"
                 className="group flex items-center p-6 bg-gradient-to-r from-[#0A693A] to-[#6B7D29] rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
               >
                 <div className="w-16 h-16 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mr-5 group-hover:scale-110 transition-transform duration-300">
@@ -275,7 +276,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-white text-lg">Email</h4>
-                  <p className="text-green-100">nyangtheo79@gmail.com</p>
+                  <p className="text-green-100">tcodings1111@gmail.com</p>
                 </div>
               </a>
 
@@ -295,7 +296,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://linkedin.com/in/ndi-theo-a695b43a8"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center p-6 bg-gradient-to-r from-blue-600 to-indigo-700 rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105"
@@ -305,7 +306,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-white text-lg">LinkedIn</h4>
-                  <p className="text-blue-100">linkedin.com/in/yourusername</p>
+                  <p className="text-blue-100">LinkedIn</p>
                 </div>
               </a>
             </div>

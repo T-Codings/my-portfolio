@@ -1,11 +1,10 @@
 import React from 'react'
 import { FaGithub, FaExternalLinkAlt, FaClock, FaCheckCircle, FaStar } from 'react-icons/fa'
 import AnimatedBackground from './AnimatedBackground'
-import proImg from '../assets/Pro img.png'
 import { Notebook } from 'lucide-react'
 import chatImg from '../assets/Mingcutechat.png'
 import mathewsImg from '../assets/mathews.png'
-import NoteBook from  'lucide-react'
+
 
 const Projects = () => {
   const projects = [
@@ -72,7 +71,7 @@ const Projects = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-[200px] h-[154px] duration-500 group-hover:scale-110"
                   />
                 )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -86,10 +85,7 @@ const Projects = () => {
                     <FaCheckCircle /> Live
                   </div>
                 )}
-                {/* Hover Overlay */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <FaStar className="text-white text-5xl animate-pulse" />
-                </div>
+              
               </div>
 
               {/* Project Content */}
