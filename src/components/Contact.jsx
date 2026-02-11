@@ -21,6 +21,26 @@ import {
   sanitizeFormData,
 } from "../utils/security";
 
+// ✅ Keep spaces + new lines for message (so words stay separated)
+function sanitizeMessage(value) {
+  const v = String(value ?? "");
+
+  // normalize line endings
+  const normalized = v.replace(/\r\n/g, "\n");
+
+  // remove weird invisible chars but keep spaces/newlines
+  const noInvisible = normalized.replace(/[\u200B-\u200D\uFEFF]/g, "");
+
+  // compress "many spaces/tabs" into one space (per line)
+  const perLine = noInvisible
+    .split("\n")
+    .map((line) => line.replace(/[ \t]+/g, " "))
+    .join("\n");
+
+  // limit to 5000 chars (same as your UI)
+  return perLine.slice(0, 5000);
+}
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -35,7 +55,9 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    const sanitizedValue = sanitizeInput(value);
+    // ✅ Don't use sanitizeInput on message (it might remove spaces)
+    const sanitizedValue =
+      name === "message" ? sanitizeMessage(value) : sanitizeInput(value);
 
     setFormData((prev) => ({
       ...prev,
@@ -59,16 +81,15 @@ const Contact = () => {
       newErrors.email = "Please enter a valid email address";
     }
 
+    // ✅ Validate the sanitized message (with spaces preserved)
     if (!validateMessage(formData.message)) {
-      newErrors.message =
-        "Message must be between 10 and 5000 characters";
+      newErrors.message = "Message must be between 10 and 5000 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // ✅ MUST be async because we use await
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -78,7 +99,6 @@ const Contact = () => {
       return;
     }
 
-    // max 3 submissions per minute
     if (!rateLimit("contact_form_submit", 3, 60000)) {
       setSubmitStatus("rate_limit");
       setTimeout(() => setSubmitStatus(null), 5000);
@@ -88,7 +108,12 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    const sanitizedData = sanitizeFormData(formData);
+    // ✅ Make sure sanitizeFormData doesn't destroy spaces
+    // We'll pass message through our sanitizeMessage again to be safe.
+    const sanitizedData = sanitizeFormData({
+      ...formData,
+      message: sanitizeMessage(formData.message),
+    });
 
     try {
       await addDoc(collection(db, "contactMessages"), {
@@ -112,12 +137,10 @@ const Contact = () => {
 
   return (
     <section id="contact" className="py-20 bg-gray-900 relative overflow-hidden">
-      {/* Running Background Objects */}
       <div className="absolute inset-0 -z-10 pointer-events-none">
         <AnimatedBackground />
       </div>
 
-      {/* Background decoration */}
       <div className="absolute top-0 right-0 w-96 h-96 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-[#6B7D29] rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-pulse-slow"></div>
 
@@ -132,7 +155,6 @@ const Contact = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <div className="animate-slide-up">
             <div className="bg-gradient-to-br from-[#0A693A] to-[#6B7D29] p-8 rounded-3xl shadow-2xl">
               <h3 className="text-3xl font-bold mb-6 text-white flex items-center gap-3">
@@ -176,7 +198,7 @@ const Contact = () => {
                     required
                     maxLength={254}
                     className="w-full px-5 py-4 border-2 border-white/30 bg-white/10 backdrop-blur-sm text-white placeholder-white/60 rounded-xl focus:outline-none focus:ring-2 focus:ring-white focus:border-transparent transition-all duration-300"
-                    placeholder="your.email@example.com"
+                    placeholder="Enter your email"
                   />
                   {errors.email && (
                     <p className="text-red-200 text-sm mt-2 flex items-center gap-1">
@@ -207,7 +229,6 @@ const Contact = () => {
                   )}
                 </div>
 
-                {/* Status Messages */}
                 {submitStatus === "success" && (
                   <div className="bg-green-500/20 border-2 border-green-400 text-white px-4 py-3 rounded-xl flex items-center gap-2 animate-fade-in">
                     <FaCheckCircle className="text-green-400" />
@@ -248,7 +269,7 @@ const Contact = () => {
             </div>
           </div>
 
-          {/* Contact Info */}
+          {/* Contact Info (unchanged) */}
           <div className="space-y-8 animate-slide-up">
             <div className="bg-gray-800/80 backdrop-blur-sm p-8 rounded-3xl shadow-xl border border-[#6B7D29]">
               <h3 className="text-3xl font-bold mb-6 gradient-text">
