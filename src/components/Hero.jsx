@@ -15,7 +15,7 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative min-h-screen bg-gray-900 overflow-hidden pt-20 sm:pt-24 mt-4"
+      className="relative min-h-screen bg-gray-900 overflow-hidden pt-20 sm:pt-24 mt-8"
     >
       {/* Running Background Objects */}
       <div className="absolute inset-0 -z-10 pointer-events-none">

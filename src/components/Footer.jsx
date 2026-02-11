@@ -6,14 +6,14 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className=" ml-6 relative overflow-hidden bg-gray-900 text-white py-12 sm:py-16">
+    <footer className=" relative overflow-hidden bg-gray-900 text-white py-12 sm:py-16">
       {/* Background decoration */}
-      <div className=" absolute inset-0 -z-10 pointer-events-none overflow-hidden">
+      <div className="absolute inset-0 -z-10 pointer-events-none overflow-hidden">
         <div className="absolute top-0 left-0 w-72 h-72 sm:w-96 sm:h-96 bg-[#0A693A] rounded-full mix-blend-multiply blur-3xl opacity-10 animate-pulse-slow" />
         <div className="absolute bottom-0 right-0 w-72 h-72 sm:w-96 sm:h-96 bg-[#6B7D29] rounded-full mix-blend-multiply blur-3xl opacity-10 animate-pulse-slow" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className=" ml-4 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Top content */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 mb-10 sm:mb-12">
           {/* About */}
