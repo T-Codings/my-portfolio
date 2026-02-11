@@ -2,7 +2,8 @@ import React from 'react'
 import { FaGithub, FaExternalLinkAlt, FaClock, FaCheckCircle, FaStar } from 'react-icons/fa'
 import AnimatedBackground from './AnimatedBackground'
 import { Notebook } from 'lucide-react'
-import chatImg from '../assets/Mingcutechat.png'
+import Mingcutechat from "../assets/mingcutechat.png";
+
 import mathewsImg from '../assets/mathews.png'
 
 
@@ -24,7 +25,7 @@ const Projects = () => {
       liveLink: 'https://creative-kitsune-24a681.netlify.app/',
       githubLink: 'https://github.com/T-Codings/silver-system.git',
       status: 'deployed',
-      image: chatImg,
+      image: Mingcutechat,
     },
     {
       title: 'Mathews Foundation',
