@@ -1,5 +1,8 @@
+
+// src/utils/visitorTracking.js
+import { db, isFirebaseConfigured } from "../firebaseConfig.js";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { db, isFirebaseConfigured } from "../firebaseConfig";
+
 
 /**
  * Get or create a session ID for tracking unique sessions
