@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { addDoc, collection, serverTimestamp } from "firebase/firestore";
+import { db } from "../firebaseConfig";
+
 import {
   FaEnvelope,
   FaGithub,
@@ -8,7 +11,7 @@ import {
   FaExclamationTriangle,
 } from "react-icons/fa";
 import AnimatedBackground from "./AnimatedBackground";
-import emailjs from "@emailjs/browser";
+
 import {
   sanitizeInput,
   validateEmail,
@@ -32,7 +35,6 @@ const Contact = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    // Sanitize input on change
     const sanitizedValue = sanitizeInput(value);
 
     setFormData((prev) => ({
@@ -40,7 +42,6 @@ const Contact = () => {
       [name]: sanitizedValue,
     }));
 
-    // Clear error for this field
     if (errors[name]) {
       setErrors((prev) => ({ ...prev, [name]: "" }));
     }
@@ -59,24 +60,25 @@ const Contact = () => {
     }
 
     if (!validateMessage(formData.message)) {
-      newErrors.message = "Message must be between 10 and 5000 characters";
+      newErrors.message =
+        "Message must be between 10 and 5000 characters";
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  // ✅ MUST be async because we use await
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Validate form
     if (!validateForm()) {
       setSubmitStatus("validation_error");
       setTimeout(() => setSubmitStatus(null), 3000);
       return;
     }
 
-    // Check rate limiting (max 3 submissions per minute)
+    // max 3 submissions per minute
     if (!rateLimit("contact_form_submit", 3, 60000)) {
       setSubmitStatus("rate_limit");
       setTimeout(() => setSubmitStatus(null), 5000);
@@ -86,52 +88,26 @@ const Contact = () => {
     setIsSubmitting(true);
     setSubmitStatus(null);
 
-    // Sanitize form data before sending
     const sanitizedData = sanitizeFormData(formData);
 
-    // ✅ EmailJS configuration (NO placeholder fallbacks)
-    const serviceID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
-    const templateID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
-    // ✅ Fail loudly if env vars are missing (prevents 400 from "YOUR_SERVICE_ID")
-    if (!serviceID || !templateID || !publicKey) {
-      console.error("Missing EmailJS env vars:", {
-        serviceID,
-        templateID,
-        publicKey,
+    try {
+      await addDoc(collection(db, "contactMessages"), {
+        name: sanitizedData.name,
+        email: sanitizedData.email,
+        message: sanitizedData.message,
+        createdAt: serverTimestamp(),
       });
-      setSubmitStatus("error");
-      setIsSubmitting(false);
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
       setTimeout(() => setSubmitStatus(null), 5000);
-      return;
+    } catch (err) {
+      console.error("FAILED...", err);
+      setSubmitStatus("error");
+      setTimeout(() => setSubmitStatus(null), 5000);
+    } finally {
+      setIsSubmitting(false);
     }
-
-    // ✅ Template params: include reply_to (common EmailJS variable)
-    const templateParams = {
-      from_name: sanitizedData.name,
-      reply_to: sanitizedData.email, // ✅ recommended
-      from_email: sanitizedData.email, // keep if your template uses it
-      message: sanitizedData.message,
-      to_email: "nyangtheo79@gmail.com",
-    };
-
-    emailjs
-      .send(serviceID, templateID, templateParams, publicKey)
-      .then((response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        setSubmitStatus("success");
-        setFormData({ name: "", email: "", message: "" });
-        setTimeout(() => setSubmitStatus(null), 5000);
-      })
-      .catch((error) => {
-        console.error("FAILED...", error);
-        setSubmitStatus("error");
-        setTimeout(() => setSubmitStatus(null), 5000);
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
   };
 
   return (
@@ -166,10 +142,7 @@ const Contact = () => {
 
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                  <label
-                    htmlFor="name"
-                    className="block text-white font-semibold mb-2"
-                  >
+                  <label htmlFor="name" className="block text-white font-semibold mb-2">
                     Name
                   </label>
                   <input
@@ -191,10 +164,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="email"
-                    className="block text-white font-semibold mb-2"
-                  >
+                  <label htmlFor="email" className="block text-white font-semibold mb-2">
                     Email
                   </label>
                   <input
@@ -216,10 +186,7 @@ const Contact = () => {
                 </div>
 
                 <div>
-                  <label
-                    htmlFor="message"
-                    className="block text-white font-semibold mb-2"
-                  >
+                  <label htmlFor="message" className="block text-white font-semibold mb-2">
                     Message
                   </label>
                   <textarea
@@ -244,7 +211,7 @@ const Contact = () => {
                 {submitStatus === "success" && (
                   <div className="bg-green-500/20 border-2 border-green-400 text-white px-4 py-3 rounded-xl flex items-center gap-2 animate-fade-in">
                     <FaCheckCircle className="text-green-400" />
-                    Message sent successfully! I'll get back to you soon.
+                    Message sent successfully! I’ll get back to you soon.
                   </div>
                 )}
 
@@ -288,25 +255,20 @@ const Contact = () => {
                 Contact Information
               </h3>
               <p className="text-gray-300 text-lg leading-relaxed mb-8">
-                Feel free to reach out to me through any of these platforms. I'm
-                actively looking for opportunities to contribute to exciting
-                projects and continue growing as a developer.
+                Feel free to reach out to me through any of these platforms.
               </p>
 
-              {/* Availability Card */}
               <div className="bg-gradient-to-r from-green-900/20 to-emerald-900/20 p-6 rounded-2xl border-2 border-green-700 mb-8">
                 <div className="flex items-center gap-3 mb-2">
                   <FaCheckCircle className="text-green-400 text-2xl animate-pulse" />
                   <h4 className="font-bold text-xl text-white">Availability</h4>
                 </div>
                 <p className="text-gray-300 font-medium">
-                  Currently available for freelance projects, contracts, and
-                  part-time opportunities.
+                  Currently available for freelance projects, contracts, and part-time opportunities.
                 </p>
               </div>
             </div>
 
-            {/* Social Links */}
             <div className="space-y-4">
               <a
                 href="mailto:nyangTheo79@gmail.com"
