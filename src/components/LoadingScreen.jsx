@@ -3,7 +3,7 @@ import { FaCode } from 'react-icons/fa'
 
 const LoadingScreen = () => {
   return (
-    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gradient-to-br from-gray-900 via-gray-800 to-green-900 animate-fade-in overflow-hidden">
+    <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-gray-900 ">
 
       <div className="relative text-center flex flex-col items-center gap-6">
         {/* Logo/Brand Icon */}
